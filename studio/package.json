@@ -13,6 +13,16 @@
   "keywords": [
     "sanity"
   ],
+  "eslintConfig": {
+    "rules": {
+      "import/no-anonymous-default-export": [
+        "error",
+        {
+          "allowObject": true
+        }
+      ]
+    }
+  },
   "dependencies": {
     "@sanity/base": "^2.27.1",
     "@sanity/core": "^2.27.0",
