@@ -26,6 +26,7 @@ export default {
       backgroundColor: "black",
     },
   },
+  radii: ["8px", "16px", "24px"],
   styles: {
     root: {
       bg: "background",

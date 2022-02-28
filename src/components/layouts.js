@@ -2,7 +2,7 @@ import { BaseStyles } from "theme-ui";
 import Nav from "./nav";
 // import footer from "./footer";
 
-export default function Layout({ children }) {
+const Layout = ({ children }) => {
   return (
     <BaseStyles>
       <Nav />
@@ -10,4 +10,6 @@ export default function Layout({ children }) {
       {/* <Footer /> */}
     </BaseStyles>
   );
-}
+};
+
+export default Layout;

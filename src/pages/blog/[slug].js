@@ -18,10 +18,7 @@ const ptComponents = {
           style={{ width: 400 }}
           alt={value.alt || " "}
           loading="lazy"
-          src={urlFor(value)
-            .width(800)
-            .fit("clip")
-            .auto("format")}
+          src={urlFor(value).width(800).fit("clip").auto("format")}
         />
       );
     },
