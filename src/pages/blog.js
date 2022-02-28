@@ -4,7 +4,7 @@ import client from "../client";
 
 const Blog = ({ posts }) => {
   return (
-    <div>
+    <div sx={{ variant: "layout.row" }}>
       <h1>Blog</h1>
       {posts.length > 0 &&
         posts.map(
@@ -12,7 +12,7 @@ const Blog = ({ posts }) => {
             slug && (
               <li key={_id}>
                 <Link href="/post/[slug]" as={`/post/${slug.current}`}>
-                  <a>{title}</a>
+                  {title}
                 </Link>{" "}
                 ({new Date(publishedAt).toDateString()})
               </li>

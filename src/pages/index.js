@@ -1,8 +1,7 @@
-// index.js
 const Index = () => {
   return (
-    <div>
-      <p>Hello world!</p>
+    <div sx={{ variant: "layout.row" }}>
+      <p>Index</p>
     </div>
   );
 };

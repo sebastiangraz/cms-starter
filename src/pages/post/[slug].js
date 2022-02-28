@@ -1,7 +1,8 @@
+/** @jsxImportSource theme-ui */
+
 import client from "../../client.js";
 import { PortableText } from "@portabletext/react";
 import imageUrlBuilder from "@sanity/image-url";
-
 function urlFor(source) {
   return imageUrlBuilder(client).image(source);
 }
@@ -36,10 +37,12 @@ const Post = ({ post }) => {
     body = [],
   } = post;
   return (
-    <article>
-      <h1>{post?.title}</h1>
-      <PortableText value={body} components={ptComponents} />
-    </article>
+    <div sx={{ variant: "layout.row" }}>
+      <article>
+        <h1>{post?.title}</h1>
+        <PortableText value={body} components={ptComponents} />
+      </article>
+    </div>
   );
 };
 

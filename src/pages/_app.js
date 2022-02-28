@@ -1,9 +1,14 @@
 import Layout from "../components/layouts";
+import { ThemeProvider } from "theme-ui";
+import theme from "../theme";
+
 const MyApp = ({ Component, pageProps, auth }) => {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <ThemeProvider theme={theme}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </ThemeProvider>
   );
 };
 export default MyApp;

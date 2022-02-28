@@ -1,8 +1,7 @@
-// index.js
 const About = () => {
   return (
-    <div>
-      <p>About world!</p>
+    <div sx={{ variant: "layout.row" }}>
+      <p>About</p>
     </div>
   );
 };
