@@ -29,8 +29,8 @@ export default {
   styles: {
     root: {
       bg: "background",
-      "-webkit-font-smoothing": "antialiased",
-      "-moz-osx-font-smoothing": "grayscale",
+      WebkitFontSmoothing: "antialiased",
+      MozOsxFontSmoothing: "grayscale",
       fontFamily: "monospace",
     },
     link: {
