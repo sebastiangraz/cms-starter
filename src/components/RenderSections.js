@@ -2,7 +2,6 @@ import * as SectionComponents from "./sections";
 import capitalizeString from "../utils/capitalizeString";
 
 function resolveSections(section) {
-  console.log(SectionComponents);
   const Section = SectionComponents[capitalizeString(section._type)];
 
   if (Section) {

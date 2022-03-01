@@ -19,10 +19,12 @@ function HeroSection(props) {
     : {};
 
   return (
-    <div sx={{ ...style, px: 5, py: 4, borderRadius: 2 }}>
+    <>
       <h1>{heading}</h1>
-      <h2>{<PortableText value={tagline} />}</h2>
-    </div>
+      <div sx={{ ...style, px: 5, py: 4, borderRadius: 2 }}>
+        <PortableText value={tagline} />
+      </div>
+    </>
   );
 }
 

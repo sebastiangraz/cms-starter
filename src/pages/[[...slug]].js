@@ -1,26 +1,12 @@
-import imageUrlBuilder from "@sanity/image-url";
 import groq from "groq";
-
-import PropTypes from "prop-types";
-import React from "react";
-
 import client from "../client";
-import Layout from "../components/layouts";
 import RenderSections from "../components/RenderSections";
 import { getSlugVariations, slugParamToPath } from "../utils/urls";
 
 const pageFragment = groq`
 ...,
 content[] {
-  ...,
-  cta {
-    ...,
-    route->
-  },
-  ctas[] {
-    ...,
-    route->
-  }
+  ...
 }`;
 
 /**
@@ -64,9 +50,7 @@ export const getServerSideProps = async ({ params }) => {
   }
 
   if (!data?._type === "page") {
-    return {
-      notFound: true,
-    };
+    return console.log("Page not found");
   }
 
   return {
@@ -74,18 +58,8 @@ export const getServerSideProps = async ({ params }) => {
   };
 };
 
-const builder = imageUrlBuilder(client);
-
 const LandingPage = (props) => {
-  const {
-    title = "Missing title",
-    description,
-    disallowRobots,
-    openGraphImage,
-    content = [],
-    config = {},
-    slug,
-  } = props;
+  const { title = "Missing title", content = [] } = props;
 
   return (
     <div sx={{ variant: "layout.row" }}>
@@ -97,16 +71,6 @@ const LandingPage = (props) => {
       )}
     </div>
   );
-};
-
-LandingPage.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  slug: PropTypes.string,
-  disallowRobots: PropTypes.bool,
-  openGraphImage: PropTypes.any,
-  content: PropTypes.any,
-  config: PropTypes.any,
 };
 
 export default LandingPage;
