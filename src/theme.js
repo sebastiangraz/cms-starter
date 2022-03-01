@@ -50,7 +50,7 @@ export default {
     h1: {
       lineHeight: 1,
       letterSpacing: "-0.02em",
-      fontSize: [4, 5, 6],
+      fontSize: [5, 5, 6],
     },
     h2: { lineHeight: 1.2, letterSpacing: "-0.016em", fontSize: [3, 4, 5] },
     h3: {

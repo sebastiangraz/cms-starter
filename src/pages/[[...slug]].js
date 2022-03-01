@@ -25,15 +25,15 @@ export const getServerSideProps = async ({ params }) => {
   if (slug === "/") {
     data = await client
       .fetch(
-        groq`
-        *[_id == "global-config"][0]{
-          frontpage -> {
-            ${pageFragment}
-          }
+        // Get the route document with one of the possible slugs for the given requested path
+        groq`*[_type == "route" && slug.current in $possibleSlugs][0]{
+        page-> {
+          ${pageFragment}
         }
-      `
+      }`,
+        { possibleSlugs: getSlugVariations(slug) }
       )
-      .then((res) => (res?.frontpage ? { ...res.frontpage, slug } : undefined));
+      .then((res) => (res?.page ? { ...res.page, slug } : undefined));
   } else {
     // Regular route
     data = await client
@@ -59,7 +59,7 @@ export const getServerSideProps = async ({ params }) => {
 };
 
 const LandingPage = (props) => {
-  const { title = "Missing title", content = [] } = props;
+  const { title = "Not found", content = [] } = props;
 
   return (
     <div sx={{ variant: "layout.row" }}>

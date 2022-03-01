@@ -1,6 +1,9 @@
 import Link from "next/link";
-import groq from "groq";
 import client from "../client";
+import groq from "groq";
+import React from "react";
+import capitalizeString from "../utils/capitalizeString";
+import { useRouter } from "next/router";
 
 const style = {
   navStyle: {
@@ -20,42 +23,63 @@ const style = {
   },
 };
 
-const Nav = ({ posts }) => {
+export function slugParamToPath(slugParam) {
+  // Possible slug value types:
+  const slug = Array.isArray(slugParam)
+    ? // - ["multiple", "paths"]
+      slugParam.join("/")
+    : // - "single-path"
+      slugParam ||
+      // - undefined -> default to "/"
+      "/";
+  return slug;
+}
+
+const Nav = ({ props }) => {
+  const [nav, setNav] = React.useState([]);
+  const router = useRouter();
+  React.useEffect(() => {
+    const navItems = client.fetch(groq`*[_type == "route"]`);
+    navItems.then((e) => {
+      setNav(e);
+    }, {});
+  }, []); //might be infinite loop issue here
+
   return (
     <nav sx={style.navStyle}>
       <div sx={style.navWrapper}>
         <Link href="/">Logo</Link>
         <div sx={style.linkGroup}>
-          {JSON.stringify(posts, 2, null)}
-          {/* {pages.length > 0 &&
-            pages.map(
-              ({ _id, slug = "", title = "" }) =>
-                slug && (
-                  <li key={_id}>
-                    <Link href="[slug]" as={`/${slug.current}`}>
-                      {slug.current}
-                    </Link>
-                  </li>
-                )
-            )} */}
-          {/* <Link href="/">Home</Link>
-          <Link href="/about">About</Link> */}
-          <Link href="/blog">Blog</Link>
+          {nav.map((e) => {
+            const isActive =
+              slugParamToPath(router.query.slug) === e.slug.current;
+
+            return (
+              <span
+                sx={{
+                  ...(isActive && {
+                    "&>a": {
+                      pointerEvent: "none",
+                      cursor: "default",
+                      textDecoration: "none",
+                    },
+                  }),
+                }}
+              >
+                {e.slug.current === "/" ? (
+                  <Link href="/">Home</Link>
+                ) : (
+                  <Link key={e.slug.current} href={e.slug.current}>
+                    {capitalizeString(e.slug.current)}
+                  </Link>
+                )}
+              </span>
+            );
+          })}
         </div>
       </div>
     </nav>
   );
 };
-
-export async function getStaticProps() {
-  const posts = await client.fetch(groq`
-      *[_type == "post" && publishedAt < now()] | order(publishedAt desc)
-    `);
-  return {
-    props: {
-      posts,
-    },
-  };
-}
 
 export default Nav;
