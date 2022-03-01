@@ -69,7 +69,7 @@ const Nav = ({ props }) => {
                 {e.slug.current === "/" ? (
                   <Link href="/">Home</Link>
                 ) : (
-                  <Link key={e.slug.current} href={e.slug.current}>
+                  <Link key={e.slug.current} href={`/${e.slug.current}`}>
                     {capitalizeString(e.slug.current)}
                   </Link>
                 )}

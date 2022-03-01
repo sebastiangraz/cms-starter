@@ -1,7 +1,7 @@
 import { BaseStyles } from "theme-ui";
 import Nav from "./nav";
-// import footer from "./footer";
 
+// import footer from "./footer";
 const Layout = ({ children }) => {
   return (
     <BaseStyles>

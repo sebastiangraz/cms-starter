@@ -1,8 +1,14 @@
+import { motion } from "framer-motion";
+import React from "react";
 import groq from "groq";
 import client from "../client";
 import RenderSections from "../components/RenderSections";
 import { getSlugVariations, slugParamToPath } from "../utils/urls";
-
+const variants = {
+  hidden: { opacity: 0, x: -200, y: 0 },
+  enter: { opacity: 1, x: 0, y: 0 },
+  exit: { opacity: 0, x: 0, y: -100 },
+};
 const pageFragment = groq`
 ...,
 content[] {
@@ -64,10 +70,16 @@ const LandingPage = (props) => {
   return (
     <div sx={{ variant: "layout.row" }}>
       {content && (
-        <>
+        <motion.div
+          initial="hidden"
+          animate="enter"
+          exit="exit"
+          variants={variants}
+          transition={{ type: "linear" }}
+        >
           <h2>{title}</h2>
           <RenderSections sections={content} />
-        </>
+        </motion.div>
       )}
     </div>
   );
