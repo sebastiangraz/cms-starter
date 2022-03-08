@@ -3,6 +3,7 @@
 import client from "../../client.js";
 import { PortableText } from "@portabletext/react";
 import imageUrlBuilder from "@sanity/image-url";
+
 function urlFor(source) {
   return imageUrlBuilder(client).image(source);
 }
@@ -36,7 +37,7 @@ const Post = ({ post }) => {
   return (
     <div sx={{ variant: "layout.row" }}>
       <article>
-        <h1>{post?.title}</h1>
+        <h1>{title}</h1>
         <PortableText value={body} components={ptComponents} />
       </article>
     </div>

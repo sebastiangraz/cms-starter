@@ -11,7 +11,11 @@ const Blog = ({ posts }) => {
           ({ _id, title = "", slug = "", publishedAt = "" }) =>
             slug && (
               <li key={_id}>
-                <Link href="/blog/[slug]" as={`/blog/${slug.current}`}>
+                <Link
+                  scroll={false}
+                  href="/blog/[slug]"
+                  as={`/blog/${slug.current}`}
+                >
                   {title}
                 </Link>{" "}
                 ({new Date(publishedAt).toDateString()})

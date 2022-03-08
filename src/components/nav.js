@@ -35,7 +35,8 @@ export function slugParamToPath(slugParam) {
   return slug;
 }
 
-const Nav = ({ props }) => {
+const Nav = ({ navItems }) => {
+  console.log(navItems);
   const [nav, setNav] = React.useState([]);
   const router = useRouter();
   React.useEffect(() => {
@@ -56,6 +57,7 @@ const Nav = ({ props }) => {
 
             return (
               <span
+                key={e.slug.current}
                 sx={{
                   ...(isActive && {
                     "&>a": {
@@ -81,5 +83,14 @@ const Nav = ({ props }) => {
     </nav>
   );
 };
+
+export async function getStaticProps() {
+  const navItems = await client.fetch(groq`*[_type == "route"]`);
+  return {
+    props: {
+      navItems,
+    },
+  };
+}
 
 export default Nav;
